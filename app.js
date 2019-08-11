@@ -1,15 +1,14 @@
-
-  const express = require('express');
-  const bodyParser = require('body-parser');
-  const cors = require('cors');
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
 // Config
-app.use(cors());
 
 const PORT = process.env.PORT || 6969;
 
 
 const app = express(); // Define our app
+app.use(cors());
 
 
 // Configure app to use bodyParser()
