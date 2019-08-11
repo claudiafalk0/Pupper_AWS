@@ -6,7 +6,7 @@
 
 
 // Config
-const port = 6969;
+const PORT = process.env.PORT || 6969;
 
 
 const app = express(); // Define our app
@@ -21,6 +21,6 @@ var sign_s3 = require('./sign_s3');
 
 app.use('/sign_s3', sign_s3.sign_s3);
 
-app.listen(port);
+app.listen(PORT);
 
-console.log("Server Started make a request to localhost:" + port )
+console.log("Server Started make a request to localhost:" + PORT )
