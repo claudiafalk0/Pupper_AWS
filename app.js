@@ -4,12 +4,13 @@
   const cors = require('cors');
 
 // Config
+app.use(cors());
+
 const PORT = process.env.PORT || 6969;
 
 
 const app = express(); // Define our app
 
-app.use(cors());
 
 // Configure app to use bodyParser()
 // This will let us get data from a POST
