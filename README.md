@@ -1,1 +1,1 @@
-# Pupper_AWS
+Node.js proxy for interfacing with AWS S3 file server
