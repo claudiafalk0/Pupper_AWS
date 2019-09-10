@@ -1,12 +1,13 @@
 const aws = require('aws-sdk');
 require('dotenv').config(); // Configure dotenv to load in the .env file
 // Configure aws with your accessKeyId and your secretAccessKey
-const pupperUrl = 'https://guarded-escarpment-41457.herokuapp.com/';
+const pupperUrl = 'guarded-escarpment-41457.herokuapp.com';
 const S3_BUCKET = process.env.Bucket;
 const BC_S3_BUCKET = process.env.bc_Bucket;
 // Now lets export this function so we can call it from somewhere else
 exports.sign_s3 = (req, res) => {
-    if (req.header.referer === pupperUrl) {
+    const ref = new URL(req.header.referer);
+    if (ref.hostname === pupperUrl) {
         aws.config.update({
             region: 'us-east-2', // Put your aws region here
             accessKeyId: process.env.AWSAccessKeyId,
