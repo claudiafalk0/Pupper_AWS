@@ -4,14 +4,13 @@ require('dotenv').config(); // Configure dotenv to load in the .env file
 const pupperUrl = 'guarded-escarpment-41457.herokuapp.com';
 const S3_BUCKET = process.env.Bucket;
 const BC_S3_BUCKET = process.env.bc_Bucket;
-let s3Params = {};
 
 // Now lets export this function so we can call it from somewhere else
 exports.sign_s3 = (req, res) => {
-    const s3 = new aws.S3();  // Create a new instance of S3gi
+    const ref = new URL(req.get('origin'));
     const fileName = req.body.fileName;
     const fileType = req.body.fileType;
-    const ref = new URL(req.get('origin'));
+    let s3Params = {};
 
     if (ref.hostname === pupperUrl) {
         aws.config.update({
@@ -40,6 +39,8 @@ exports.sign_s3 = (req, res) => {
             ACL: 'public-read'
         }
     }
+
+    const s3 = new aws.S3();  // Create a new instance of S3gi
 
 // Make a request to the S3 API to get a signed URL which we can use to upload our file
     s3.getSignedUrl('putObject', s3Params, (err, data) => {
