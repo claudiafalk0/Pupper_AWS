@@ -6,9 +6,9 @@ const S3_BUCKET = process.env.Bucket;
 const BC_S3_BUCKET = process.env.bc_Bucket;
 // Now lets export this function so we can call it from somewhere else
 exports.sign_s3 = (req, res) => {
-    const ref = req.get('origin');
+    const ref = new URL(req.get('origin'));
     console.log('REFURL:', ref);
-    if (ref === pupperUrl) {
+    if (ref.hostname === pupperUrl) {
         aws.config.update({
             region: 'us-east-2', // Put your aws region here
             accessKeyId: process.env.AWSAccessKeyId,
